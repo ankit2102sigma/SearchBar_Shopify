@@ -138,24 +138,16 @@
           "settings": {
             "icon_color": "#ffffff"
           }
-        },
-        "template--15958646620300__8a8c9391-bbda-4d54-9e09-45cc859b504d-1684411029b9168f51-1": {
-          "type": "heading",
-          "settings": {
-            "text": "Video",
-            "heading_tag": "h2"
-          }
         }
       },
       "block_order": [
-        "template--15958646620300__8a8c9391-bbda-4d54-9e09-45cc859b504d-1684411029b9168f51-0",
-        "template--15958646620300__8a8c9391-bbda-4d54-9e09-45cc859b504d-1684411029b9168f51-1"
+        "template--15958646620300__8a8c9391-bbda-4d54-9e09-45cc859b504d-1684411029b9168f51-0"
       ],
       "settings": {
         "autoplay": true,
         "show_controls": true,
         "video_size": "md",
-        "external_video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "external_video_url": "https:\/\/youtu.be\/KdB4v9ssdIY",
         "text_color": "#ffffff"
       }
     },
