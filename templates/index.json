@@ -76,35 +76,40 @@
         "template--15958646620300__d68d29f7-dc4f-4f62-8059-3377b2f904ef-16844108607d15438d-0": {
           "type": "logo",
           "settings": {
-            "logo_width": 120,
+            "logo": "shopify:\/\/shop_images\/dell_3c727b23-1cca-4638-afa2-89978fb512ac.jpg",
+            "logo_width": 250,
             "link": ""
           }
         },
         "template--15958646620300__d68d29f7-dc4f-4f62-8059-3377b2f904ef-16844108607d15438d-1": {
           "type": "logo",
           "settings": {
-            "logo_width": 120,
+            "logo": "shopify:\/\/shop_images\/81Sq4eJPsKL._SL1500_847ce6d7-c9d5-4300-aa8b-8fe61866751e.jpg",
+            "logo_width": 250,
             "link": ""
           }
         },
         "template--15958646620300__d68d29f7-dc4f-4f62-8059-3377b2f904ef-16844108607d15438d-2": {
           "type": "logo",
           "settings": {
-            "logo_width": 120,
+            "logo": "shopify:\/\/shop_images\/dellinspiration.jpg",
+            "logo_width": 250,
             "link": ""
           }
         },
         "template--15958646620300__d68d29f7-dc4f-4f62-8059-3377b2f904ef-16844108607d15438d-3": {
           "type": "logo",
           "settings": {
-            "logo_width": 120,
+            "logo": "shopify:\/\/shop_images\/12.webp",
+            "logo_width": 250,
             "link": ""
           }
         },
         "template--15958646620300__d68d29f7-dc4f-4f62-8059-3377b2f904ef-16844108607d15438d-4": {
           "type": "logo",
           "settings": {
-            "logo_width": 120,
+            "logo": "shopify:\/\/shop_images\/dellinspiration.jpg",
+            "logo_width": 250,
             "link": ""
           }
         }
