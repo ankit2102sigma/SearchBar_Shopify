@@ -23,7 +23,7 @@
     
     const searchInput = document.getElementById('search-input').value;
     if (searchInput.length >= 3) {
-        fetch(`/api/search?q=${searchInput}`)
+        fetch(`http://localhost:8000/api/search?q=${searchInput}`)
             .then(response => response.json())
             .then(data => {
                 const resultsContainer = document.getElementById('search-results');
