@@ -13,7 +13,41 @@ Supported variables
 Nothing
 {%- endcomment -%}
 
-<header-search id="header-search-{{ section.id }}" class="header-search">
+<script>
+document.getElementByClassName('header-find').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const searchInput = document.getElementById('header-find').value;
+    if (searchInput.length >= 3) {
+        fetch(`http://localhost:8000/api/search?q=${searchInput}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultsContainer = document.getElementById('result-search__content');
+                resultsContainer.innerHTML = '';
+                
+                if (data.length > 0) {
+                    data.slice(0, 4).forEach(result => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = result.name;
+                        resultsContainer.appendChild(listItem);
+                    });
+                    
+                    if (data.length > 4) {
+                        const showMoreItem = document.createElement('li');
+                        showMoreItem.textContent = 'Show More';
+                        resultsContainer.appendChild(showMoreItem);
+                    }
+                } else {
+                    const noResultsItem = document.createElement('li');
+                    noResultsItem.textContent = 'No results found';
+                    resultsContainer.appendChild(noResultsItem);
+                }
+            })
+            .catch(error => console.error(error));
+    }
+});
+</script>
+<header-search id="header-search-{{ section.id }}" class="header-find">
   <div class="container">
     <form id="predictive-search-form" action="{{ routes.search_url }}" method="GET" aria-owns="header-predictive-search" class="header-search__form" role="search">
       <div class="header-search__form-control">
@@ -27,7 +61,7 @@ Nothing
     </form>
 
     <predictive-search id="header-predictive-search" class="predictive-search">
-      <div class="predictive-search__content" slot="results"></div>
+      <div class="result-search__content" slot="results"></div>
     </predictive-search>
   </div>
 </header-search>
