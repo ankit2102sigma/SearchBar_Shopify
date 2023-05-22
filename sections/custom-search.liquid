@@ -18,38 +18,38 @@
 
 {% javascript %}
 
-  document.getElementById('search-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const searchInput = document.getElementById('search-input').value;
-    if (searchInput.length >= 3) {
-      alert("hi");
-        fetch(`http://localhost:8000/api/search?q=${searchInput}`)
-            .then(response => response.json())
-            .then(data => {
-                const resultsContainer = document.getElementById('search-results');
-                resultsContainer.innerHTML = '';
-                
-                if (data.length > 0) {
-                    data.slice(0, 4).forEach(result => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = result.title;
-                        resultsContainer.appendChild(listItem);
-                    });
-                    
-                    if (data.length > 4) {
-                        const showMoreItem = document.createElement('li');
-                        showMoreItem.textContent = 'Show More';
-                        resultsContainer.appendChild(showMoreItem);
-                    }
-                } else {
-                    const noResultsItem = document.createElement('li');
-                    noResultsItem.textContent = 'No results found';
-                    resultsContainer.appendChild(noResultsItem);
-                }
-            })
-            .catch(error => console.error(error));
-    }
+document.getElementById('search-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  const searchInput = document.getElementById('search-input').value;
+  if (searchInput.length >= 3) {
+    alert("hi");
+    fetch(`http://localhost:8000/api/search?q=${searchInput}`)
+      .then(response => response.json())
+      .then(data => {
+        const resultsContainer = document.getElementById('search-results');
+        resultsContainer.innerHTML = '';
+
+        if (data.length > 0) {
+          data.slice(0, 4).forEach(result => {
+            const listItem = document.createElement('li');
+            listItem.textContent = result.title; // Update to display the title property
+            resultsContainer.appendChild(listItem);
+          });
+
+          if (data.length > 4) {
+            const showMoreItem = document.createElement('li');
+            showMoreItem.textContent = 'Show More';
+            resultsContainer.appendChild(showMoreItem);
+          }
+        } else {
+          const noResultsItem = document.createElement('li');
+          noResultsItem.textContent = 'No results found';
+          resultsContainer.appendChild(noResultsItem);
+        }
+      })
+      .catch(error => console.error(error));
+  }
 });
 
 {% endjavascript %}
