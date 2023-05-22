@@ -146,7 +146,7 @@
       "settings": {
         "autoplay": true,
         "show_controls": true,
-        "video_size": "md",
+        "video_size": "lg",
         "external_video_url": "https:\/\/youtu.be\/KdB4v9ssdIY",
         "text_color": "#ffffff"
       }
