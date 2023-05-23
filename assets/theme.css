@@ -7690,7 +7690,9 @@ ul #search-results {
 #product-data-search{
   float:left;
   width: 25%;
+  margin: 0px 90px;
 }
 #head-search{
   text-align:center;
+  
 }
