@@ -7667,7 +7667,7 @@ ul {
   overflow: hidden;
 }
 
-#search-form-search-snippets{
+#search-form-search-snippets input{
   width: 100%;
   height:60px;
 }
