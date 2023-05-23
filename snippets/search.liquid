@@ -37,17 +37,38 @@
               resultsContainer.appendChild(listItem);
             });
 
-            if (data.length > 4) {
-              const showMoreItem = document.createElement('li');
-              showMoreItem.textContent = 'Show More';
-              showMoreItem.addEventListener('click', function() {
-                // Send all data results to the next page
-                const searchData = encodeURIComponent(JSON.stringify(data));
-                console.log("searchDate", searchData)
-                window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}&data=${searchData}`;
-              });
-              resultsContainer.appendChild(showMoreItem);
-            }
+if (data.length > 4) {
+  const showMoreItem = document.createElement('li');
+  showMoreItem.textContent = 'Show More';
+  showMoreItem.addEventListener('click', function() {
+    // Prepare the data payload
+    const searchData = JSON.stringify(data);
+    const payload = {
+      searchInput: searchInput,
+      searchData: searchData
+    };
+
+    // Create a form dynamically
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://laptopifyy.myshopify.com/pages/search-result';
+
+    // Create input fields for each data property
+    Object.keys(payload).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = payload[key];
+      form.appendChild(input);
+    });
+
+    // Submit the form
+    document.body.appendChild(form);
+    form.submit();
+  });
+  resultsContainer.appendChild(showMoreItem);
+}
+
           } else {
             const noResultsItem = document.createElement('li');
             noResultsItem.textContent = 'No results found';
