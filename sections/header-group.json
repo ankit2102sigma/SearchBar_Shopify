@@ -56,13 +56,8 @@
       }
     },
     "6226aa69-3971-48b8-b428-c2dfeff5c932": {
-      "type": "custom-liquid",
+      "type": "custom-search",
       "settings": {
-        "separate_section_with_border": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "liquid": "<p>Write or copy\/paste Liquid code<\/p>",
-        "text_alignment": "center"
       }
     }
   },
