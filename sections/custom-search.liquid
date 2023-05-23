@@ -4,22 +4,23 @@
   // Get the search input and search results data from the URL query parameters
   const urlParams = new URLSearchParams(window.location.search);
   const searchInput = urlParams.get('q');
-  const searchData = urlParams.get('data');
 
-  // Parse the search results data back to an object
-  const searchResults = JSON.parse(decodeURIComponent(searchData));
+
+ fetch(`http://localhost:8000/api/search?q=${searchInput}`)
+        .then(response => response.json())
+        .then(data => {
   const searchResultsContainer = document.getElementById('search-results-container');
 
-  searchResults.forEach(result => {
+  searchResults.forEach(data => {
     const listItem = document.createElement('div');
     const link = document.createElement('a');
     const image = document.createElement('img');
     image.id = 'product-image-search';
-    image.src = result.image;
-    image.alt = result.title;
-    link.href = result.link;
+    image.src = data.image;
+    image.alt = data.title;
+    link.href = data.link;
 
-    link.textContent = result.title;
+    link.textContent = data.title;
 
     listItem.appendChild(image);
     listItem.appendChild(link);
