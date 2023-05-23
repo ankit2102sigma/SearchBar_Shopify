@@ -31,6 +31,7 @@
             resultsContainer.innerHTML = '';
 
             if (data.length > 0) {
+              console.log("calling...")
               data.slice(0, 4).forEach(result => {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
