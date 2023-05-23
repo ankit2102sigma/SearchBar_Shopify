@@ -39,13 +39,24 @@ document.getElementById('search-form').addEventListener('keyup', function(event)
           if (data.length > 4) {
             const showMoreItem = document.createElement('li');
             showMoreItem.textContent = 'Show More';
-            resultsContainer.appendChild(showMoreItem);
+             const showMoreItem = createShowMoreItem(data.length, searchInput);
+              resultsContainer.appendChild(showMoreItem);
           }
         } else {
           const noResultsItem = document.createElement('li');
           noResultsItem.textContent = 'No results found';
           resultsContainer.appendChild(noResultsItem);
         }
+
+   function createShowMoreItem(totalResults, searchInput) {
+    const showMoreItem = document.createElement('li');
+    showMoreItem.textContent = 'Show More';
+    showMoreItem.addEventListener('click', function() {
+      // Redirect to the search result page and pass the search input
+      window.location.href = `https://laptopifyy.myshopify.com/search?q=${encodeURIComponent(searchInput)}`;
+    });
+    return showMoreItem;
+  }
       })
       .catch(error => console.error(error));
   }
