@@ -52,6 +52,7 @@
               showMoreItem.addEventListener('click', function() {
                 // Send all data results to the next page
                 const searchData = encodeURIComponent(JSON.stringify(data));
+                console.log("searchDate", searchData)
                 window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}&data=${searchData}`;
               });
               resultsContainer.appendChild(showMoreItem);
