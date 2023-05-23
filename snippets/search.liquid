@@ -1,16 +1,17 @@
 
-
-<form id="header-search">
+<header-search id="header-search-{{ section.id }}" class="header-search">
+<form id="search-form">
   <input type="text" id="search-input" placeholder="Search..." />
 </form>
 
 <ul id="search-results"></ul>
 <div id="image-container"></div>
+  </header-search>
 
 
   
 <script>
-document.getElementById('header-search').addEventListener('keyup', function(event) {
+document.getElementById('search-form').addEventListener('keyup', function(event) {
   event.preventDefault();
 
   const searchInput = document.getElementById('search-input').value;
