@@ -7681,3 +7681,6 @@ ul {
 ul #search-results {
     margin-top: 20px;
 }
+#search-results-container{
+  width:70px
+}
