@@ -10,56 +10,61 @@
 
 
   
+<header-search id="header-search-{{ section.id }}" class="header-search">
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="Search..." />
+  </form>
+
+  <ul id="search-results"></ul>
+  <div id="image-container"></div>
+</header-search>
+
+
 <script>
-document.getElementById('search-form').addEventListener('keyup', function(event) {
-  event.preventDefault();
+  document.getElementById('search-form').addEventListener('keyup', function(event) {
+    event.preventDefault();
 
-  const searchInput = document.getElementById('search-input').value.trim();
-  if (searchInput.length >= 3) {
-    fetch(`http://localhost:8000/api/search?q=${searchInput}`)
-      .then(response => response.json())
-      .then(data => {
-        const resultsContainer = document.getElementById('search-results');
-        resultsContainer.innerHTML = '';
+    const searchInput = document.getElementById('search-input').value.trim();
+    if (searchInput.length >= 3) {
+      fetch(`http://localhost:8000/api/search?q=${searchInput}`)
+        .then(response => response.json())
+        .then(data => {
+          const resultsContainer = document.getElementById('search-results');
+          resultsContainer.innerHTML = '';
 
-        if (data.length > 0) {
-          data.slice(0, 4).forEach(result => {
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-            const image = document.createElement('img');
-            image.src = result.image;
-            image.alt = result.title;
-            link.textContent = result.title;
-            link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-            listItem.appendChild(image);
-            listItem.appendChild(link);
-            resultsContainer.appendChild(listItem);
-          });
+          if (data.length > 0) {
+            data.slice(0, 4).forEach(result => {
+              const listItem = document.createElement('li');
+              const link = document.createElement('a');
+              const image = document.createElement('img');
+              image.src = result.image;
+              image.alt = result.title;
+              link.textContent = result.title;
+              link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+              listItem.appendChild(image);
+              listItem.appendChild(link);
+              resultsContainer.appendChild(listItem);
+            });
 
-          if (data.length > 4) {
-            const showMoreItem = document.createElement('li');
-            showMoreItem.textContent = 'Show More';
-             const showMoreItems = createShowMoreItem(data.length, searchInput);
-              resultsContainer.appendChild(showMoreItems);
+            if (data.length > 4) {
+              const showMoreItem = document.createElement('li');
+              showMoreItem.textContent = 'Show More';
+              showMoreItem.addEventListener('click', function() {
+                // Send all data results to the next page
+                const searchData = encodeURIComponent(JSON.stringify(data));
+                window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}&data=${searchData}`;
+              });
+              resultsContainer.appendChild(showMoreItem);
+            }
+          } else {
+            const noResultsItem = document.createElement('li');
+            noResultsItem.textContent = 'No results found';
+            resultsContainer.appendChild(noResultsItem);
           }
-        } else {
-          const noResultsItem = document.createElement('li');
-          noResultsItem.textContent = 'No results found';
-          resultsContainer.appendChild(noResultsItem);
-        }
-
-   function createShowMoreItem(totalResults, searchInput) {
-    const showMoreItem = document.createElement('li');
-    showMoreItem.textContent = 'Show More';
-    showMoreItem.addEventListener('click', function() {
-      // Redirect to the search result page and pass the search input
-      window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
-    });
-    return showMoreItem;
-  }
-      })
-      .catch(error => console.error(error));
-  }
-});
+        })
+        .catch(error => console.error(error));
+    }
+  });
 </script>
+
 
