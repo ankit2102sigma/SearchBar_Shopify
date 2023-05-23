@@ -7691,3 +7691,6 @@ ul #search-results {
   float:left;
   width: 25%;
 }
+#head-search{
+  text-align:center;
+}
