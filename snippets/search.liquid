@@ -51,7 +51,7 @@ if (data.length > 4) {
     // Create a form dynamically
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}&data=${searchData}`;
+    form.action = `https://laptopifyy.myshopify.com/pages/search-result`;
 
     // Create input fields for each data property
     Object.keys(payload).forEach(key => {
