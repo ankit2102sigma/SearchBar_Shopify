@@ -8,30 +8,22 @@
 
   // Parse the search results data back to an object
   const searchResults = JSON.parse(decodeURIComponent(searchData));
-
-  // Get the search results container element
   const searchResultsContainer = document.getElementById('search-results-container');
 
-  // Create HTML elements for each search result
   searchResults.forEach(result => {
     const listItem = document.createElement('div');
     const link = document.createElement('a');
     const image = document.createElement('img');
     image.id = 'product-image-search';
-
-    // Set the image source, alt text, and link URL
     image.src = result.image;
     image.alt = result.title;
     link.href = result.link;
 
-    // Set the link text as the product title
     link.textContent = result.title;
 
-    // Append the image and link to the list item
     listItem.appendChild(image);
     listItem.appendChild(link);
 
-    // Append the list item to the search results container
     searchResultsContainer.appendChild(listItem);
   });
 </script>
