@@ -35,7 +35,8 @@
               data.slice(0, 4).forEach(result => {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
-                link.textContent = result.handle;
+                link.textContent = result.title;
+                console.log("result title",result.title)
                 link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
                 listItem.appendChild(link);
                 resultsContainer.appendChild(listItem);
