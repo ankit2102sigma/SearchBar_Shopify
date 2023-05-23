@@ -36,8 +36,8 @@ document.getElementById('search-form').addEventListener('keyup', function(event)
             image.alt = result.title;
             link.textContent = result.title;
             link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-            listItem.appendChild(link);
             listItem.appendChild(image);
+            listItem.appendChild(link);
             resultsContainer.appendChild(listItem);
           });
 
