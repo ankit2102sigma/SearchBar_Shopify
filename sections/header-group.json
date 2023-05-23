@@ -54,16 +54,10 @@
         "show_locale_selector": false,
         "transparent_header_text_color": "#000000"
       }
-    },
-    "6226aa69-3971-48b8-b428-c2dfeff5c932": {
-      "type": "custom-search",
-      "settings": {
-      }
     }
   },
   "order": [
     "announcement-bar",
-    "header",
-    "6226aa69-3971-48b8-b428-c2dfeff5c932"
+    "header"
   ]
 }
