@@ -7682,15 +7682,16 @@ ul #search-results {
     margin-top: 20px;
 }
 #search-results-container{
-  width:100%
+  width:100%;
+  margin: 0px 90px;
 }
 #product-image-search{
-  width:100px
+  width:100px;
 }
 #product-data-search{
   float:left;
   width: 25%;
-  margin: 0px 90px;
+  
 }
 #head-search{
   text-align:center;
