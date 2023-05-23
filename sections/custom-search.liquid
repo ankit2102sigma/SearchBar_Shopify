@@ -11,7 +11,7 @@
         .then(data => {
   const searchResultsContainer = document.getElementById('search-results-container');
 
-  searchResults.forEach(data => {
+  data.forEach(data => {
     const listItem = document.createElement('div');
     const link = document.createElement('a');
     const image = document.createElement('img');
