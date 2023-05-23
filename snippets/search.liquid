@@ -14,7 +14,7 @@
 document.getElementById('search-form').addEventListener('keyup', function(event) {
   event.preventDefault();
 
-  const searchInput = document.getElementById('search-input').value.trim();
+  const searchInput = document.getElementById('search-input').value;
   if (searchInput.length >= 3) {
     fetch(`http://localhost:8000/api/search?q=${searchInput}`)
       .then(response => response.json())
