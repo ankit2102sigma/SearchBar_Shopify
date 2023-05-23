@@ -7666,3 +7666,8 @@ ul {
   display: -webkit-box;
   overflow: hidden;
 }
+
+#search-form-search-snippets{
+  width: 100%;
+  height:60px;
+}
