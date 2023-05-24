@@ -15,8 +15,10 @@
       searchResultsContainer.innerHTML = ''; // Clear the container before appending results
 
       if (data.length > 0) {
-        const noResultsMessage = document.createElement('h1');
-           noResultsMessage.textContent = 'Search Result';
+         const searchResultHeading = document.createElement('h1');
+        searchResultHeading.textContent = 'Search Result';
+        searchResultsContainer.appendChild(searchResultHeading);
+
         data.forEach(result => {
            
           const listItem = document.createElement('div');
