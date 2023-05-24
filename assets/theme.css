@@ -7714,4 +7714,7 @@ ul #search-results {
     padding: 20px;
 }
 }
+#readLessLink{
+ display:inline-block ;
+color:blue;
 }
