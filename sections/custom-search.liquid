@@ -30,7 +30,7 @@
           image.alt = result.title;
           link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
 
-          const truncatedTitleLength = 20; // Adjust the desired length for truncation
+          const truncatedTitleLength = 40; // Adjust the desired length for truncation
           const truncatedTitle = result.title.length > truncatedTitleLength
             ? result.title.substring(0, truncatedTitleLength) + '...' 
             : result.title;
@@ -41,6 +41,7 @@
 
           if (result.title.length > truncatedTitleLength) {
             const readMoreLink = document.createElement('a');
+            readMoreLink.id = 'readmore-search-result'
             readMoreLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
             readMoreLink.textContent = 'Read More';
 
