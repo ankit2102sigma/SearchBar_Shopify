@@ -1,8 +1,7 @@
- <div class="predictive-search__results">
-
-   <h1 id='head-search'>Search Result</h1>
-<div id="search-results-container"></div>
- </div>
+<div class="predictive-search__results">
+  <h1 id="head-search">Search Result</h1>
+  <div id="search-results-container"></div>
+</div>
 
 <script>
   // Get the search input from the URL query parameters
@@ -15,20 +14,26 @@
       const searchResultsContainer = document.getElementById('search-results-container');
       searchResultsContainer.innerHTML = ''; // Clear the container before appending results
 
-      data.forEach(result => {
-        const listItem = document.createElement('div');
-        listItem.id = 'product-data-search';
-        const link = document.createElement('a');
-        const image = document.createElement('img');
-        image.id = 'product-image-search';
-        image.src = result.image;
-        image.alt = result.title;
-        link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-        link.textContent = result.title;
-        listItem.appendChild(image);
-        listItem.appendChild(link);
-        searchResultsContainer.appendChild(listItem);
-      });
+      if (data.length > 0) {
+        data.forEach(result => {
+          const listItem = document.createElement('div');
+          listItem.id = 'product-data-search';
+          const link = document.createElement('a');
+          const image = document.createElement('img');
+          image.id = 'product-image-search';
+          image.src = result.image;
+          image.alt = result.title;
+          link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+          link.textContent = result.title;
+          listItem.appendChild(image);
+          listItem.appendChild(link);
+          searchResultsContainer.appendChild(listItem);
+        });
+      } else {
+        const noResultsMessage = document.createElement('p');
+        noResultsMessage.textContent = 'No Search Result';
+        searchResultsContainer.appendChild(noResultsMessage);
+      }
     })
     .catch(error => console.error(error));
 </script>
