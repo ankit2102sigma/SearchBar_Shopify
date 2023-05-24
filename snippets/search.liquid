@@ -1,5 +1,6 @@
+  
 <header-search id="header-search-{{ section.id }}" class="header-search">
-  <form id="search-form">
+  <form  id="search-form">
     <input type="text" id="search-input" placeholder="Search..." />
   </form>
 
@@ -9,15 +10,20 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js" defer></script>
 
+
+
 <script>
-  document.getElementById('search-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+
+
+  document.getElementById('search-form').addEventListener('input', function(event) {
+    event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
-    const searchInputEncode = he.encode(searchInput);
+    const searchInputencode = he.encode(searchInput)
 
+    
     if (searchInput.length >= 3) {
-      fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
+      fetch(`http://localhost:8000/api/search?q=${searchInputencode}`)
         .then(response => response.json())
         .then(data => {
           const resultsContainer = document.getElementById('search-results');
@@ -37,15 +43,24 @@
               listItem.appendChild(image);
               listItem.appendChild(link);
               resultsContainer.appendChild(listItem);
+            
             });
 
+            document.getElementById('search-form').addEventListener('submit', function(event) {
+            const searchInput = document.getElementById('search-input').value.trim();
+            if (searchInput.length >= 3) {
+              window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
+            }
+          });
+
             if (data.length > 4) {
+             
               const showMoreItem = document.createElement('button');
               showMoreItem.textContent = 'Show More';
               showMoreItem.addEventListener('click', function() {
                 // Send all data results to the next page
                 const searchData = encodeURIComponent(JSON.stringify(data));
-                console.log("searchData", searchData);
+                console.log("searchDate", searchData)
                 window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
               });
               resultsContainer.appendChild(showMoreItem);
@@ -57,6 +72,10 @@
           }
         })
         .catch(error => console.error(error));
+    }
+    else{
+               const resultsContainer = document.getElementById('search-results');
+          resultsContainer.innerHTML = '';
     }
   });
 </script>
