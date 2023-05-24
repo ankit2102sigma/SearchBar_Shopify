@@ -43,7 +43,9 @@
               const listItem = document.createElement('li');
               listItem.id = 'search-list-li';
               const link = document.createElement('a');
-              const imglink = document.createElement('a');
+               const imglink = document.createElement('a');
+                imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+              
               const image = document.createElement('img');
               image.src = result.image;
               image.alt = result.title;
@@ -54,7 +56,7 @@
               imglink.src = result.image;
               imglink.alt = result.title;
               link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-              imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+              imglink.appendChild(image);
               listItem.appendChild(imglink);
               listItem.appendChild(link);
               resultsContainer.appendChild(listItem);
