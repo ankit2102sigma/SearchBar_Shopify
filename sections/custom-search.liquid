@@ -1,5 +1,5 @@
 <div class="predictive-search__results">
-  <h1 id="head-search">Search Result</h1>
+<!--   <h1 id="head-search">Search Result</h1> -->
   <div id="search-results-container"></div>
 </div>
 
@@ -15,7 +15,10 @@
       searchResultsContainer.innerHTML = ''; // Clear the container before appending results
 
       if (data.length > 0) {
+        
         data.forEach(result => {
+           const noResultsMessage = document.createElement('h1');
+           noResultsMessage.textContent = 'Search Result';
           const listItem = document.createElement('div');
           listItem.id = 'product-data-search';
           const link = document.createElement('a');
