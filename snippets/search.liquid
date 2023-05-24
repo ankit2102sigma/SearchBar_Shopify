@@ -13,11 +13,15 @@
 
 
 <script>
+
+
   document.getElementById('search-form').addEventListener('input', function(event) {
     event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
     const searchInputencode = he.encode(searchInput)
+
+    
     if (searchInput.length >= 3) {
       fetch(`http://localhost:8000/api/search?q=${searchInputencode}`)
         .then(response => response.json())
@@ -39,6 +43,7 @@
               listItem.appendChild(image);
               listItem.appendChild(link);
               resultsContainer.appendChild(listItem);
+              window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
             });
 
             if (data.length > 4) {
