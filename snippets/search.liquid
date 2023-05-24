@@ -13,6 +13,13 @@
 
 
 <script>
+              document.getElementById('search-form').addEventListener('submit', function(event) {
+                  event.preventDefault();
+            const searchInput = document.getElementById('search-input').value.trim();
+            if (searchInput.length >= 3) {
+              window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
+            }
+          });
 
 
   document.getElementById('search-form').addEventListener('input', function(event) {
@@ -45,14 +52,8 @@
               resultsContainer.appendChild(listItem);
             
             });
-            if (searchInput.length >= 3) {
-            document.getElementById('search-form').addEventListener('submit', function(event) {
-            const searchInput = document.getElementById('search-input').value.trim();
-            
-              window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
-            
-          });
-            }
+
+
 
             if (data.length > 4) {
              
