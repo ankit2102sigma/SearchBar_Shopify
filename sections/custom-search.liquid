@@ -24,6 +24,8 @@
           listItem.id = 'product-data-search';
 
           const link = document.createElement('a');
+           const imglink = document.createElement('a');
+                imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
           const image = document.createElement('img');
           image.id = 'product-image-search';
           image.src = result.image;
@@ -36,6 +38,7 @@
             : result.title;
 
           link.textContent = truncatedTitle;
+           imglink.appendChild(image);
           listItem.appendChild(image);
           listItem.appendChild(link);
 
