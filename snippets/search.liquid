@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js" defer></script>
 
 <script>
-  document.getElementById('search-form').addEventListener('keyup', function(event) {
+  document.getElementById('search-form').addEventListener('input', function(event) {
     event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
