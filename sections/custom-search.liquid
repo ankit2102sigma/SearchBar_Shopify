@@ -16,7 +16,9 @@
 
       if (data.length > 0) {
          const searchResultHeading = document.createElement('h1');
+        searchResultHeading.id = 'heading-search-result';
         searchResultHeading.textContent = 'Search Result';
+        
         searchResultsContainer.appendChild(searchResultHeading);
 
         data.forEach(result => {
