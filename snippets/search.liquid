@@ -35,8 +35,6 @@
               image.alt = result.title;
               const sanitizedTitle = result.title.replace(/(<([^>]+)>)/gi, '');
               link.textContent = sanitizedTitle;
-
-            
               link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
               listItem.appendChild(image);
               listItem.appendChild(link);
@@ -62,6 +60,10 @@
           }
         })
         .catch(error => console.error(error));
+    }
+    else{
+               const resultsContainer = document.getElementById('search-results');
+          resultsContainer.innerHTML = '';
     }
   });
 </script>
