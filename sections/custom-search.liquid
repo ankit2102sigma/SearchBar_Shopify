@@ -46,13 +46,35 @@
 
             const fullTitle = result.title;
 
+            const readLessLink = document.createElement('a');
+            readLessLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+            readLessLink.textContent = 'Read Less';
+            readLessLink.style.display = 'none';
+
+            const toggleTitle = function() {
+              if (link.textContent === truncatedTitle) {
+                link.textContent = fullTitle;
+                readMoreLink.style.display = 'none';
+                readLessLink.style.display = 'inline';
+              } else {
+                link.textContent = truncatedTitle;
+                readMoreLink.style.display = 'inline';
+                readLessLink.style.display = 'none';
+              }
+            };
+
             readMoreLink.addEventListener('click', function(event) {
               event.preventDefault();
-              link.textContent = fullTitle;
-              listItem.removeChild(readMoreLink);
+              toggleTitle();
+            });
+
+            readLessLink.addEventListener('click', function(event) {
+              event.preventDefault();
+              toggleTitle();
             });
 
             listItem.appendChild(readMoreLink);
+            listItem.appendChild(readLessLink);
           }
 
           searchResultsContainer.appendChild(listItem);
@@ -63,6 +85,21 @@
         noResultsMessage.textContent = 'No Search Result found';
         searchResultsContainer.appendChild(noResultsMessage);
       }
+
+      // Event listener to wrap text back and hide "Read Less" button when clicking anywhere on the page
+      document.addEventListener('click', function(event) {
+        const readLessLinks = document.querySelectorAll('a.read-less-link');
+        readLessLinks.forEach(readLessLink => {
+          readLessLink.style.display = 'none';
+          const listItem = readLessLink.parentNode;
+          const link = listItem.querySelector('a');
+          const truncatedTitleLength = 20; // Adjust the desired length for truncation
+          const truncatedTitle = link.textContent.substring(0, truncatedTitleLength) + '...';
+          link.textContent = truncatedTitle;
+          const readMoreLink = listItem.querySelector('a.read-more-link');
+          readMoreLink.style.display = 'inline';
+        });
+      });
     })
     .catch(error => console.error(error));
 </script>
