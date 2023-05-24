@@ -1,5 +1,4 @@
 <div class="predictive-search__results">
-<!--   <h1 id="head-search">Search Result</h1> -->
   <div id="search-results-container"></div>
 </div>
 
@@ -15,25 +14,38 @@
       searchResultsContainer.innerHTML = ''; // Clear the container before appending results
 
       if (data.length > 0) {
-         const searchResultHeading = document.createElement('h1');
+        const searchResultHeading = document.createElement('h1');
         searchResultHeading.id = 'heading-search-result';
         searchResultHeading.textContent = 'Search Result';
-        
         searchResultsContainer.appendChild(searchResultHeading);
 
         data.forEach(result => {
-           
           const listItem = document.createElement('div');
           listItem.id = 'product-data-search';
+
           const link = document.createElement('a');
           const image = document.createElement('img');
           image.id = 'product-image-search';
           image.src = result.image;
           image.alt = result.title;
           link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-          link.textContent = result.title;
+
+          const truncatedTitleLength = 20; // Adjust the desired length for truncation
+          const truncatedTitle = result.title.length > truncatedTitleLength
+            ? result.title.substring(0, truncatedTitleLength) + '...' 
+            : result.title;
+
+          link.textContent = truncatedTitle;
           listItem.appendChild(image);
           listItem.appendChild(link);
+
+          if (result.title.length > truncatedTitleLength) {
+            const readMoreLink = document.createElement('a');
+            readMoreLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+            readMoreLink.textContent = 'Read More';
+            listItem.appendChild(readMoreLink);
+          }
+
           searchResultsContainer.appendChild(listItem);
         });
       } else {
