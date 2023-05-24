@@ -7697,3 +7697,7 @@ ul #search-results {
   text-align:center;
   
 }
+
+#search-list-li{
+ list-style:none
+}
