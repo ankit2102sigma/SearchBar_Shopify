@@ -41,13 +41,14 @@
 
           if (result.title.length > truncatedTitleLength) {
             const readMoreLink = document.createElement('a');
-            readMoreLink.id = 'readmore-search-result'
+            readMoreLink.id = 'readmore-search-result';
             readMoreLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
             readMoreLink.textContent = 'Read More';
 
             const fullTitle = result.title;
 
             const readLessLink = document.createElement('a');
+          readLessLink.id =  'readmore-search-result';
             readLessLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
             readLessLink.textContent = 'Read Less';
             readLessLink.style.display = 'none';
