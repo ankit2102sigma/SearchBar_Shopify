@@ -43,6 +43,15 @@
             const readMoreLink = document.createElement('a');
             readMoreLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
             readMoreLink.textContent = 'Read More';
+
+            const fullTitle = result.title;
+
+            readMoreLink.addEventListener('click', function(event) {
+              event.preventDefault();
+              link.textContent = fullTitle;
+              listItem.removeChild(readMoreLink);
+            });
+
             listItem.appendChild(readMoreLink);
           }
 
