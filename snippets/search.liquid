@@ -8,7 +8,8 @@
   <div id="image-container"></div>
 </header-search>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.1/purify.min.js" integrity="sha384-piVucZX6ffy4qMxPUI/9zFCfAGtGtD/M/hC+IzNtkpK/WRrSb8N+2u6cJxuNl52T" crossorigin="anonymous" defer></script>
+
 
 <script>
   document.getElementById('search-form').addEventListener('input', function(event) {
@@ -31,7 +32,9 @@
               image.src = result.image;
               image.alt = result.title;
               var title = he.encode(result.title)
-              link.textContent =result.title;
+              const sanitizedTitle = DOMPurify.sanitize(result.title, { ALLOWED_TAGS: [] });
+              link.textContent = sanitizedTitle;
+            
               link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
               listItem.appendChild(image);
               listItem.appendChild(link);
