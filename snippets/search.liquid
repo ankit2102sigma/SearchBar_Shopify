@@ -13,6 +13,13 @@
 
 
 <script>
+
+   function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substr(0, maxLength) + '...';
+    }
+    return text;
+  }
               document.getElementById('search-form').addEventListener('submit', function(event) {
                   event.preventDefault();
             const searchInput = document.getElementById('search-input').value.trim();
