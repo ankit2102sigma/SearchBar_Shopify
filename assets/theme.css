@@ -7704,6 +7704,7 @@ ul #search-results {
 
 #heading-search-result{
  text-align:center;  
+  margin:20px;
 }
 
 @media screen and (max-width: 768px) {
