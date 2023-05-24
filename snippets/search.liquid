@@ -33,10 +33,12 @@
               link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
               listItem.appendChild(image);
               listItem.appendChild(link);
+              listItem = he.encode(listItem)
               resultsContainer.appendChild(listItem);
             });
 
             if (data.length > 4) {
+             
               const showMoreItem = document.createElement('li');
               showMoreItem.textContent = 'Show More';
               showMoreItem.addEventListener('click', function() {
