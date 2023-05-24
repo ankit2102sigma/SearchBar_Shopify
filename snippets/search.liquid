@@ -50,7 +50,7 @@
               const sanitizedTitle = result.title.replace(/(<([^>]+)>)/gi, '');
               const truncatedTitle = truncateText(sanitizedTitle, 40); // Adjust the maximum length as needed
               link.textContent = truncatedTitle;
-              imglink.image =  image.src;
+              imglink.image =  result.image;
               link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
               imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
               listItem.appendChild(imglink);
