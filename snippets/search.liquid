@@ -28,6 +28,7 @@
           if (data.length > 0) {
             data.slice(0, 4).forEach(result => {
               const listItem = document.createElement('li');
+              listItem.id = 'search-list-li';
               const link = document.createElement('a');
               const image = document.createElement('img');
               image.src = result.image;
