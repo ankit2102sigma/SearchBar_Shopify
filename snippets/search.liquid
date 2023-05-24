@@ -38,37 +38,25 @@
           const resultsContainer = document.getElementById('search-results');
           resultsContainer.innerHTML = '';
 
- if (data.length > 0) {
-  data.slice(0, 4).forEach(result => {
-    const listItem = document.createElement('li');
-    listItem.id = 'search-list-li';
-
-    const link = document.createElement('a');
-    link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-
-    const image = document.createElement('img');
-    image.src = result.image;
-    image.alt = result.title;
-
-    const sanitizedTitle = result.title.replace(/(<([^>]+)>)/gi, '');
-    const truncatedTitle = truncateText(sanitizedTitle, 40); // Adjust the maximum length as needed
-
-    const titleContainer = document.createElement('div');
-    titleContainer.classList.add('title-container');
-
-    const titleLink = document.createElement('a');
-    titleLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-    titleLink.textContent = truncatedTitle;
-
-    titleContainer.appendChild(titleLink);
-
-    link.appendChild(image);
-    link.appendChild(titleContainer);
-
-    listItem.appendChild(link);
-    resultsContainer.appendChild(listItem);
-  });
-}
+          if (data.length > 0) {
+            data.slice(0, 4).forEach(result => {
+              const listItem = document.createElement('li');
+              listItem.id = 'search-list-li';
+              const link = document.createElement('a');
+              const imglink = document.createElement('a');
+              const image = document.createElement('img');
+              image.src = result.image;
+              image.alt = result.title;
+              const sanitizedTitle = result.title.replace(/(<([^>]+)>)/gi, '');
+              const truncatedTitle = truncateText(sanitizedTitle, 40); // Adjust the maximum length as needed
+              link.textContent = truncatedTitle;
+              imglink.image = image;
+              link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+              imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+              listItem.appendChild(imglink);
+              listItem.appendChild(link);
+              resultsContainer.appendChild(listItem);
+            });
 
             if (data.length > 4) {
               const showMoreItem = document.createElement('button');
