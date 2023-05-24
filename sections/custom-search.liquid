@@ -38,6 +38,7 @@
         });
       } else {
         const noResultsMessage = document.createElement('h1');
+        noResultsMessage.id = 'heading-search-result';
         noResultsMessage.textContent = 'No Search Result';
         searchResultsContainer.appendChild(noResultsMessage);
       }
