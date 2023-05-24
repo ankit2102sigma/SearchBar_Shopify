@@ -15,8 +15,9 @@
     event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
+    const searchInputencode = he.encode(searchInput)
     if (searchInput.length >= 3) {
-      fetch(`http://localhost:8000/api/search?q=${searchInput}`)
+      fetch(`http://localhost:8000/api/search?q=${searchInputencode}`)
         .then(response => response.json())
         .then(data => {
           const resultsContainer = document.getElementById('search-results');
@@ -33,7 +34,6 @@
               link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
               listItem.appendChild(image);
               listItem.appendChild(link);
-              
               resultsContainer.appendChild(listItem);
             });
 
