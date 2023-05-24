@@ -57,8 +57,10 @@
               if (link.textContent === truncatedTitle) {
                 link.textContent = fullTitle;
                 readMoreLink.style.display = 'none';
+                readLessLink.style.display = 'inline-block';
               } else {
                 link.textContent = truncatedTitle;
+                readMoreLink.style.display = 'inline-block';
                 readLessLink.style.display = 'none';
               }
             };
