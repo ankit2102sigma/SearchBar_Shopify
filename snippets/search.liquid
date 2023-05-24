@@ -16,7 +16,7 @@
               document.getElementById('search-form').addEventListener('submit', function(event) {
                   event.preventDefault();
             const searchInput = document.getElementById('search-input').value.trim();
-            if (data.length >= 3) {
+            if (searchInput.length >= 3) {
               window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
             }
           });
