@@ -31,7 +31,7 @@
               const image = document.createElement('img');
               image.src = result.image;
               image.alt = result.title;
-              var title = he.encode(result.title)
+              // var title = he.encode(result.title)
               const sanitizedTitle = DOMPurify.sanitize(result.title, { ALLOWED_TAGS: [] });
               link.textContent = sanitizedTitle;
             
