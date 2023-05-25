@@ -32,7 +32,7 @@
     const searchInputEncode = he.encode(searchInput);
 
     if (searchInput.length >= 3) {
-      const cacheKey = `search_${searchInputEncode}`;
+      const cacheKey = `/search_${searchInputEncode}`;
 
       caches.open('search-cache').then(cache => {
         cache.match(cacheKey).then(response => {
