@@ -114,4 +114,15 @@
       resultsContainer.appendChild(noResultsItem);
     }
   }
+
+        function displayError(message) {
+  const resultsContainer = document.getElementById('search-results');
+  resultsContainer.innerHTML = '';
+
+  const errorItem = document.createElement('li');
+  errorItem.textContent = message;
+  errorItem.style.color = 'red';
+
+  resultsContainer.appendChild(errorItem);
+}
 </script>
