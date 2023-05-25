@@ -31,52 +31,36 @@
     const searchInput = document.getElementById('search-input').value.trim();
     const searchInputEncode = he.encode(searchInput);
 
-document.getElementById('search-form').addEventListener('input', function(event) {
-  event.preventDefault();
+    if (searchInput.length >= 3) {
+      const cacheKey = `search_${searchInputEncode}`;
 
-  const searchInput = document.getElementById('search-input').value.trim();
-  const searchInputEncode = he.encode(searchInput);
-
-document.getElementById('search-form').addEventListener('input', function(event) {
-  event.preventDefault();
-
-  const searchInput = document.getElementById('search-input').value.trim();
-  const searchInputEncode = he.encode(searchInput);
-
-  if (searchInput.length >= 3) {
-    const cacheKey = `search_${searchInputEncode}`;
-
-    // Check if the response is already cached
-    caches.open('search-cache').then(cache => {
-      cache.match(cacheKey).then(response => {
-        if (response) {
-          response.json().then(data => {
-            displaySearchResults(data);
-          });
-        } else {
-          fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
-            .then(response => {
-              // Clone the response before using it
-              const responseClone = response.clone();
-              response.json().then(data => {
+      // Check if the response is already cached
+      caches.open('search-cache').then(cache => {
+        cache.match(cacheKey).then(response => {
+          if (response) {
+            response.json().then(data => {
+              displaySearchResults(data);
+            });
+          } else {
+            fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
+              .then(response => response.json())
+              .then(data => {
                 // Cache the response
                 caches.open('search-cache').then(cache => {
+                  const responseClone = response.clone();
                   cache.put(cacheKey, responseClone);
                 });
                 displaySearchResults(data);
-              });
-            })
-            .catch(error => console.error(error));
-        }
+              })
+              .catch(error => console.error(error));
+          }
+        });
       });
-    });
-  } else {
-    const resultsContainer = document.getElementById('search-results');
-    resultsContainer.innerHTML = '';
-  }
-});
-
-
+    } else {
+      const resultsContainer = document.getElementById('search-results');
+      resultsContainer.innerHTML = '';
+    }
+  });
 
   function displaySearchResults(data) {
     const resultsContainer = document.getElementById('search-results');
