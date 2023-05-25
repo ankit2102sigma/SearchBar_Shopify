@@ -55,10 +55,9 @@
                     displaySearchResults(data);
                   });
                 })
-             .catch(error => {
-              console.error("Error:", error);
-              displayError("Failed to fetch search results. Please try again later.");
-            });
+                .catch(error => console.error("error", error));
+            }
+
           setTimeout(() => {
             caches.delete('search-cache').then(() => {
               console.log('Cache cleared.');
