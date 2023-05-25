@@ -30,9 +30,10 @@
 
     const searchInput = document.getElementById('search-input').value.trim();
     const searchInputEncode = he.encode(searchInput);
-    const cacheKey = 'search_results'; // Fixed cache key for all search queries
 
     if (searchInput.length >= 3) {
+      const cacheKey = `search_${searchInputEncode}`;
+
       caches.open('search-cache').then(cache => {
         cache.match(cacheKey).then(response => {
           if (response) {
