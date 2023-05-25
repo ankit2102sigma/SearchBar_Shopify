@@ -43,14 +43,16 @@
             });
           } else {
             fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
-              .then(response => response.json())
-              .then(data => {
-                // Cache the response
-                caches.open('search-cache').then(cache => {
-                  const responseClone = response.clone();
-                  cache.put(cacheKey, responseClone);
+              .then(response => {
+                // Clone the response before using it
+                const responseClone = response.clone();
+                response.json().then(data => {
+                  // Cache the response
+                  caches.open('search-cache').then(cache => {
+                    cache.put(cacheKey, responseClone);
+                  });
+                  displaySearchResults(data);
                 });
-                displaySearchResults(data);
               })
               .catch(error => console.error(error));
           }
