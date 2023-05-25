@@ -7,7 +7,7 @@
   const urlParams = new URLSearchParams(window.location.search);
   const searchInput = urlParams.get('q');
 
-  const cacheKey = `search_${searchInput}`;
+  const cacheKey = `/search_${searchInput}`;
 
   caches.open('search-cache').then(cache => {
     cache.match(cacheKey).then(response => {
