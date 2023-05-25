@@ -41,20 +41,22 @@
               displaySearchResults(data);
             });
           } else {
-            fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
-              .then(response => {
-                // Clone the response before using it
-                const responseClone = response.clone();
-                response.json().then(data => {
-                  // Cache the response
-                  caches.open('search-cache').then(cache => {
-                    cache.put(cacheKey, responseClone);
+              fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
+                .then(response => {
+                  // Clone the response before using it
+                  const responseClone = response.clone();
+                  response.json().then(data => {
+                    if (data !== null) {
+                      // Cache the response
+                      caches.open('search-cache').then(cache => {
+                        cache.put(cacheKey, responseClone);
+                      });
+                    }
+                    displaySearchResults(data);
                   });
-                  displaySearchResults(data);
-                });
-              })
-              .catch(error => console.error(error));
-          }
+                })
+                .catch(error => console.error(error));
+            }
 
           // Clear cache after 24 hours
           setTimeout(() => {
