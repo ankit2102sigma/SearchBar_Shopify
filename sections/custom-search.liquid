@@ -7,104 +7,124 @@
   const urlParams = new URLSearchParams(window.location.search);
   const searchInput = urlParams.get('q');
 
-  fetch(`http://localhost:8000/api/search?q=${searchInput}`)
-    .then(response => response.json())
-    .then(data => {
-      const searchResultsContainer = document.getElementById('search-results-container');
-      searchResultsContainer.innerHTML = ''; 
+  const cacheKey = `search_${searchInput}`;
 
-      if (data.length > 0) {
-        const searchResultHeading = document.createElement('h1');
-        searchResultHeading.id = 'heading-search-result';
-        searchResultHeading.textContent = 'Search Result';
-        searchResultsContainer.appendChild(searchResultHeading);
-
-        data.forEach(result => {
-          const listItem = document.createElement('div');
-          listItem.id = 'product-data-search';
-
-          const link = document.createElement('a');
-           const imglink = document.createElement('a');
-                imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-          const image = document.createElement('img');
-          image.id = 'product-image-search';
-          image.src = result.image;
-          image.alt = result.title;
-          link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-
-          const truncatedTitleLength = 40; // Adjust the desired length for truncation
-          const truncatedTitle = result.title.length > truncatedTitleLength
-            ? result.title.substring(0, truncatedTitleLength) + '...' 
-            : result.title;
-
-          link.textContent = truncatedTitle;
-           imglink.appendChild(image);
-          listItem.appendChild(imglink);
-          listItem.appendChild(link);
-
-          if (result.title.length > truncatedTitleLength) {
-            const readMoreLink = document.createElement('a');
-            readMoreLink.id = 'readmore-search-result';
-            readMoreLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-            readMoreLink.textContent = 'Read More';
-
-            const fullTitle = result.title;
-
-            const readLessLink = document.createElement('a');
-          readLessLink.id =  'readmore-search-result';
-            readLessLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-            readLessLink.textContent = 'Read Less';
-            readLessLink.style.display = 'none';
-
-            const toggleTitle = function() {
-              if (link.textContent === truncatedTitle) {
-                link.textContent = fullTitle;
-                readMoreLink.style.display = 'none';
-                readLessLink.style.display = 'inline-block';
-              } else {
-                link.textContent = truncatedTitle;
-                readMoreLink.style.display = 'inline-block';
-                readLessLink.style.display = 'none';
-              }
-            };
-
-            readMoreLink.addEventListener('click', function(event) {
-              event.preventDefault();
-              toggleTitle();
-            });
-
-            readLessLink.addEventListener('click', function(event) {
-              event.preventDefault();
-              toggleTitle();
-            });
-
-            listItem.appendChild(readMoreLink);
-            listItem.appendChild(readLessLink);
-          }
-
-          searchResultsContainer.appendChild(listItem);
+  caches.open('search-cache').then(cache => {
+    cache.match(cacheKey).then(response => {
+      if (response) {
+        response.json().then(data => {
+          displaySearchResults(data);
         });
       } else {
-        const noResultsMessage = document.createElement('h1');
-        noResultsMessage.id = 'heading-search-result';
-        noResultsMessage.textContent = 'No Search Result found';
-        searchResultsContainer.appendChild(noResultsMessage);
-      }
+        fetch(`http://localhost:8000/api/search?q=${searchInput}`)
+          .then(response => response.json())
+          .then(data => {
+            // Cache the response
+            cache.put(cacheKey, new Response(JSON.stringify(data)));
 
-      // Event listener to wrap text back and hide "Read Less" button when clicking anywhere on the page
-      document.addEventListener('click', function(event) {
-        const readLessLinks = document.querySelectorAll('a.read-less-link');
-        readLessLinks.forEach(readLessLink => {
+            displaySearchResults(data);
+          })
+          .catch(error => console.error(error));
+      }
+    });
+  });
+
+  function displaySearchResults(data) {
+    const searchResultsContainer = document.getElementById('search-results-container');
+    searchResultsContainer.innerHTML = '';
+
+    if (data.length > 0) {
+      const searchResultHeading = document.createElement('h1');
+      searchResultHeading.id = 'heading-search-result';
+      searchResultHeading.textContent = 'Search Result';
+      searchResultsContainer.appendChild(searchResultHeading);
+
+      data.forEach(result => {
+        const listItem = document.createElement('div');
+        listItem.id = 'product-data-search';
+
+        const link = document.createElement('a');
+        const imglink = document.createElement('a');
+        imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+
+        const image = document.createElement('img');
+        image.id = 'product-image-search';
+        image.src = result.image;
+        image.alt = result.title;
+        link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+
+        const truncatedTitleLength = 40; // Adjust the desired length for truncation
+        const truncatedTitle = result.title.length > truncatedTitleLength
+          ? result.title.substring(0, truncatedTitleLength) + '...'
+          : result.title;
+
+        link.textContent = truncatedTitle;
+        imglink.appendChild(image);
+        listItem.appendChild(imglink);
+        listItem.appendChild(link);
+
+        if (result.title.length > truncatedTitleLength) {
+          const readMoreLink = document.createElement('a');
+          readMoreLink.id = 'readmore-search-result';
+          readMoreLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+          readMoreLink.textContent = 'Read More';
+
+          const fullTitle = result.title;
+
+          const readLessLink = document.createElement('a');
+          readLessLink.id = 'readmore-search-result';
+          readLessLink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+          readLessLink.textContent = 'Read Less';
           readLessLink.style.display = 'none';
-          const listItem = readLessLink.parentNode;
-          const link = listItem.querySelector('a');
-          const truncatedTitleLength = 20; // Adjust the desired length for truncation
-          const truncatedTitle = link.textContent.substring(0, truncatedTitleLength) + '...';
-          link.textContent = truncatedTitle;
-          const readMoreLink = listItem.querySelector('a.read-more-link');
-          readMoreLink.style.display = 'inline';
-        });
+
+          const toggleTitle = function() {
+            if (link.textContent === truncatedTitle) {
+              link.textContent = fullTitle;
+              readMoreLink.style.display = 'none';
+              readLessLink.style.display = 'inline-block';
+            } else {
+              link.textContent = truncatedTitle;
+              readMoreLink.style.display = 'inline-block';
+              readLessLink.style.display = 'none';
+            }
+          };
+
+          readMoreLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            toggleTitle();
+          });
+
+          readLessLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            toggleTitle();
+          });
+
+          listItem.appendChild(readMoreLink);
+          listItem.appendChild(readLessLink);
+        }
+
+        searchResultsContainer.appendChild(listItem);
       });
-    })
-    .catch(error => console.error(error));
+    } else {
+      const noResultsMessage = document.createElement('h1');
+      noResultsMessage.id = 'heading-search-result';
+      noResultsMessage.textContent = 'No Search Result found';
+      searchResultsContainer.appendChild(noResultsMessage);
+    }
+
+    // Event listener to wrap text back and hide "Read Less" button when clicking anywhere on the page
+    document.addEventListener('click', function(event) {
+      const readLessLinks = document.querySelectorAll('a.read-less-link');
+      readLessLinks.forEach(readLessLink => {
+        readLessLink.style.display = 'none';
+        const listItem = readLessLink.parentNode;
+        const link = listItem.querySelector('a');
+        const truncatedTitleLength = 20; // Adjust the desired length for truncation
+        const truncatedTitle = link.textContent.substring(0, truncatedTitleLength) + '...';
+        link.textContent = truncatedTitle;
+        const readMoreLink = listItem.querySelector('a.read-more-link');
+        readMoreLink.style.display = 'inline';
+      });
+    });
+  }
 </script>
