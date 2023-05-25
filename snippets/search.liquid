@@ -43,7 +43,6 @@
           } else {
               fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
                 .then(response => {
-                  alert("here");
                   // Clone the response before using it
                   const responseClone = response.clone();
                   response.json().then(data => {
