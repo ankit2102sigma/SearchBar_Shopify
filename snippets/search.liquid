@@ -55,7 +55,10 @@
                     displaySearchResults(data);
                   });
                 })
-                .catch(error => console.error("error", error));
+                            .catch(error => {
+              console.error("Error:", error);
+              displayError("Failed to fetch search results. Please try again later.");
+            });
             }
 
           setTimeout(() => {
