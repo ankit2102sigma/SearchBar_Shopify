@@ -46,7 +46,7 @@
                   // Clone the response before using it
                   const responseClone = response.clone();
                   response.json().then(data => {
-                    if (data !== null) {
+                    if (data !== "") {
                       // Cache the response
                       caches.open('search-cache').then(cache => {
                         cache.put(cacheKey, responseClone);
