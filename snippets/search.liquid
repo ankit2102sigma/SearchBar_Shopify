@@ -29,58 +29,80 @@
     event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
-    const searchInputencode = he.encode(searchInput);
+    const searchInputEncode = he.encode(searchInput);
 
     if (searchInput.length >= 3) {
-      fetch(`http://localhost:8000/api/search?q=${searchInputencode}`)
-        .then(response => response.json())
-        .then(data => {
-          const resultsContainer = document.getElementById('search-results');
-          resultsContainer.innerHTML = '';
+      const cacheKey = `search_${searchInputEncode}`;
 
-          if (data.length > 0) {
-            data.slice(0, 4).forEach(result => {
-              const listItem = document.createElement('li');
-              listItem.id = 'search-list-li';
-              const link = document.createElement('a');
-               const imglink = document.createElement('a');
-                imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-              
-              const image = document.createElement('img');
-              image.src = result.image;
-              image.alt = result.title;
-              const sanitizedTitle = result.title.replace(/(<([^>]+)>)/gi, '');
-              const truncatedTitle = truncateText(sanitizedTitle, 40); // Adjust the maximum length as needed
-              link.textContent = truncatedTitle;
-              
-              link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
-              imglink.appendChild(image);
-              listItem.appendChild(imglink);
-              listItem.appendChild(link);
-              resultsContainer.appendChild(listItem);
+      // Check if the response is already cached
+      caches.open('search-cache').then(cache => {
+        cache.match(cacheKey).then(response => {
+          if (response) {
+            response.json().then(data => {
+              displaySearchResults(data);
             });
-
-            if (data.length > 4) {
-              const showMoreItem = document.createElement('button');
-              showMoreItem.textContent = 'Show More';
-              showMoreItem.addEventListener('click', function() {
-                // Send all data results to the next page
-                const searchData = encodeURIComponent(JSON.stringify(data));
-                console.log("searchData", searchData);
-                window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
-              });
-              resultsContainer.appendChild(showMoreItem);
-            }
           } else {
-            const noResultsItem = document.createElement('li');
-            noResultsItem.textContent = 'No results found';
-            resultsContainer.appendChild(noResultsItem);
+            fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
+              .then(response => response.json())
+              .then(data => {
+                // Cache the response
+                caches.open('search-cache').then(cache => {
+                  const responseClone = response.clone();
+                  cache.put(cacheKey, responseClone);
+                });
+                displaySearchResults(data);
+              })
+              .catch(error => console.error(error));
           }
-        })
-        .catch(error => console.error(error));
+        });
+      });
     } else {
       const resultsContainer = document.getElementById('search-results');
       resultsContainer.innerHTML = '';
     }
   });
+
+  function displaySearchResults(data) {
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = '';
+
+    if (data.length > 0) {
+      data.slice(0, 4).forEach(result => {
+        const listItem = document.createElement('li');
+        listItem.id = 'search-list-li';
+        const link = document.createElement('a');
+        const imglink = document.createElement('a');
+        imglink.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+
+        const image = document.createElement('img');
+        image.src = result.image;
+        image.alt = result.title;
+        const sanitizedTitle = result.title.replace(/(<([^>]+)>)/gi, '');
+        const truncatedTitle = truncateText(sanitizedTitle, 40); // Adjust the maximum length as needed
+        link.textContent = truncatedTitle;
+
+        link.href = `https://laptopifyy.myshopify.com/products/${result.handle}`;
+        imglink.appendChild(image);
+        listItem.appendChild(imglink);
+        listItem.appendChild(link);
+        resultsContainer.appendChild(listItem);
+      });
+
+      if (data.length > 4) {
+        const showMoreItem = document.createElement('button');
+        showMoreItem.textContent = 'Show More';
+        showMoreItem.addEventListener('click', function() {
+          // Send all data results to the next page
+          const searchData = encodeURIComponent(JSON.stringify(data));
+          console.log("searchData", searchData);
+          window.location.href = `https://laptopifyy.myshopify.com/pages/search-result?q=${encodeURIComponent(searchInput)}`;
+        });
+        resultsContainer.appendChild(showMoreItem);
+      }
+    } else {
+      const noResultsItem = document.createElement('li');
+      noResultsItem.textContent = 'No results found';
+      resultsContainer.appendChild(noResultsItem);
+    }
+  }
 </script>
