@@ -34,7 +34,6 @@
     if (searchInput.length >= 3) {
       const cacheKey = `search_${searchInputEncode}`;
 
-      // Check if the response is already cached
       caches.open('search-cache').then(cache => {
         cache.match(cacheKey).then(response => {
           if (response) {
@@ -59,7 +58,9 @@
 
           // Clear cache after 24 hours
           setTimeout(() => {
-            cache.delete(cacheKey);
+            caches.delete('search-cache').then(() => {
+              console.log('Cache cleared.');
+            });
           }, 24 * 60 * 60 * 1000); // Execute after 24 hours (24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
         });
       });
