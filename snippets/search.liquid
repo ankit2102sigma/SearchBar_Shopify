@@ -37,6 +37,12 @@ document.getElementById('search-form').addEventListener('input', function(event)
   const searchInput = document.getElementById('search-input').value.trim();
   const searchInputEncode = he.encode(searchInput);
 
+document.getElementById('search-form').addEventListener('input', function(event) {
+  event.preventDefault();
+
+  const searchInput = document.getElementById('search-input').value.trim();
+  const searchInputEncode = he.encode(searchInput);
+
   if (searchInput.length >= 3) {
     const cacheKey = `search_${searchInputEncode}`;
 
@@ -69,6 +75,7 @@ document.getElementById('search-form').addEventListener('input', function(event)
     resultsContainer.innerHTML = '';
   }
 });
+
 
 
   function displaySearchResults(data) {
