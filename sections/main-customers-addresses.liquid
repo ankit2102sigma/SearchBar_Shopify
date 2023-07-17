@@ -29,8 +29,6 @@
             <div class="empty-state">
               <p>{{ 'customer.addresses.no_addresses' | t }}</p>
 
-              {%- assign button_content = 'customer.addresses.add_address' | t -%}
-              {%- render 'button', content: button_content, aria_controls: 'customer-address-new' -%}
             </div>
           {%- else -%}
             <div class="v-stack gap-8 sm:gap-12">
@@ -75,7 +73,7 @@
     {%- render 'address-form', address: customer.new_address -%}
 
     {%- for address in customer.addresses -%}
-   
+      {%- render 'address-form', address: address -%}
     {%- endfor -%}
   </div>
 </div>
