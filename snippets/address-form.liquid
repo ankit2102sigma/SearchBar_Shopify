@@ -42,10 +42,7 @@ Supported parameters
 
         {%- render 'input', name: 'address[zip]', label: zip_label, value: form.zip, autocomplete: 'postal-code', autocapitalize: 'characters' -%}
 
-        <country-selector class="contents" country="{{ form.country | escape }}" province="{{ form.province | escape }}">
-          {%- render 'select', name: 'address[country]', label: country_label, options: all_country_option_tags, autocomplete: 'country' -%}
-          {%- render 'select', name: 'address[province]', label: province_label, autocomplete: 'address-level1' -%}
-        </country-selector>
+
 
         {%- render 'input', name: 'address[city]', label: city_label, value: form.city, autocomplete: 'address-level2' -%}
         {%- render 'input', name: 'address[address1]', label: address1_label, value: form.address1, autocomplete: 'address-line1' -%}
