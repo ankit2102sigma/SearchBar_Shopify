@@ -50,8 +50,7 @@
                         <button type="button" class="link" aria-controls="customer-address-{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
 
                         <form method="post" action="{{ address.url }}">
-                          <input type="hidden" name="_method" value="delete">
-                          <button type="submit" class="link" is="confirm-button" data-message="{{ 'customer.addresses.delete_confirm' | t | escape }}">{{ 'customer.addresses.delete' | t }}</button>
+                         
                         </form>
                       </div>
                     </div>
