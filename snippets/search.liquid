@@ -44,7 +44,7 @@
               displaySearchResults(data);
             });
           } else {
-              fetch(`http://localhost:3000/address`)
+              fetch(`http://localhost:3000/address?q=${searchInputEncode}`)
                 .then(response => {
                   // Clone the response before using it
                   const responseClone = response.clone();
