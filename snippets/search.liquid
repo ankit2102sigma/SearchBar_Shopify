@@ -1,13 +1,17 @@
 <header-search id="header-search-{{ section.id }}" class="header-search">
   <form id="search-form">
+
+    
     <input type="text" id="search-input" placeholder="Search..." />
   </form>
 
-  <ul id="search-results"></ul>
+
+<div id="address-suggestions-dropdown"></div>
   <div id="image-container"></div>
 </header-search>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.js" defer></script>
+
 
 <script>
   function truncateText(text, maxLength) {
