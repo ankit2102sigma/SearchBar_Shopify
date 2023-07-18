@@ -45,7 +45,7 @@
               displaySearchResults(data);
             });
           } else {
-              fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
+              fetch(`https://27cb-111-93-247-122.ngrok-free.app/address`)
                 .then(response => {
                   // Clone the response before using it
                   const responseClone = response.clone();
