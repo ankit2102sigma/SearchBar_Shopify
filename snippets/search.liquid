@@ -45,7 +45,7 @@
               displaySearchResults(data);
             });
           } else {
-              fetch(` https://0669-111-93-247-122.ngrok-free.app/parceladdress/2.0/domestic/addresses?q=${encodeURIComponent(query)}&count=5&country_code=nz)
+              fetch(`https://0669-111-93-247-122.ngrok-free.app/parceladdress/2.0/domestic/addresses?q=${encodeURIComponent(query)}&count=5&country_code=nz`)
                 .then(response => {
                   // Clone the response before using it
                   const responseClone = response.clone();
