@@ -41,7 +41,7 @@
               displaySearchResults(data);
             });
           } else {
-              fetch(`http://localhost:8000/api/search?q=${searchInputEncode}`)
+              fetch(`http://localhost:8000/api/addressFinder?q=${searchInputEncode}`)
                 .then(response => {
                   // Clone the response before using it
                   const responseClone = response.clone();
