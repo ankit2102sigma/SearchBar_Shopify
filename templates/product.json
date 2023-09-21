@@ -112,10 +112,30 @@
         "title": "Related products",
         "content": ""
       }
+    },
+    "1695295005aa15e118": {
+      "type": "apps",
+      "blocks": {
+        "28b7c524-38d9-4e61-943a-4512eeb07294": {
+          "type": "shopify:\/\/apps\/seal-subscriptions\/blocks\/subscription-widget\/13b25004-a140-4ab7-b5fe-29918f759699",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "28b7c524-38d9-4e61-943a-4512eeb07294"
+      ],
+      "settings": {
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "1695295005aa15e118"
   ]
 }
