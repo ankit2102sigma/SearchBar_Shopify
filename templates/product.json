@@ -29,6 +29,12 @@
           "settings": {
           }
         },
+        "00dbe96e-2e2d-4e60-84de-4435f2acbca9": {
+          "type": "shopify:\/\/apps\/seal-subscriptions\/blocks\/subscription-widget\/13b25004-a140-4ab7-b5fe-29918f759699",
+          "settings": {
+            "product": ""
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -64,12 +70,6 @@
             "stack_products": false,
             "show_quick_buy": true
           }
-        },
-        "00dbe96e-2e2d-4e60-84de-4435f2acbca9": {
-          "type": "shopify:\/\/apps\/seal-subscriptions\/blocks\/subscription-widget\/13b25004-a140-4ab7-b5fe-29918f759699",
-          "settings": {
-            "product": "alienware-m18-gaming-laptop"
-          }
         }
       },
       "block_order": [
@@ -77,11 +77,11 @@
         "price",
         "variant_picker",
         "separator",
+        "00dbe96e-2e2d-4e60-84de-4435f2acbca9",
         "buy_buttons",
         "description",
         "quantity_selector",
-        "complementary_products",
-        "00dbe96e-2e2d-4e60-84de-4435f2acbca9"
+        "complementary_products"
       ],
       "settings": {
         "container_size": "full",
