@@ -32,7 +32,7 @@
         "00dbe96e-2e2d-4e60-84de-4435f2acbca9": {
           "type": "shopify:\/\/apps\/seal-subscriptions\/blocks\/subscription-widget\/13b25004-a140-4ab7-b5fe-29918f759699",
           "settings": {
-            "product": ""
+            "product": "{{ product }}"
           }
         },
         "buy_buttons": {
