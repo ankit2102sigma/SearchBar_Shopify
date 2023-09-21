@@ -38,10 +38,66 @@
         "overlay_color": "#000000",
         "overlay_opacity": 30
       }
+    },
+    "1695294879ab23d896": {
+      "type": "apps",
+      "blocks": {
+        "a5a646f1-c013-4b04-8971-f32f44f65b28": {
+          "type": "shopify:\/\/apps\/subscription-plus\/blocks\/subscription-plus\/79c17119-154e-465c-8480-a7e0399512ff",
+          "settings": {
+            "advance_widget": false,
+            "default_option": "subscription",
+            "template": "modern",
+            "text_color": "#000000",
+            "branding_color": "#000000",
+            "terms_page_link": "",
+            "one_time_translation": "One time purchase",
+            "widget_type": "widget_1",
+            "show_term_checkbox": true,
+            "subscription_policy_text": "You’re subscribing to receive this item multiple times, on a recurring basis (according to the frequency you select) with a discount on every recurring order. You may cancel or change your subscription at any time.",
+            "enable_benifits": true,
+            "tooltip_text": "You can edit, skip, cancel and reschedule the subscription at any time.",
+            "enable_shadow": true,
+            "delivery_text": "Select Delivery Frequency",
+            "selected_text_color": "",
+            "hover_text_color": "",
+            "radio_color": "",
+            "bg_color_selected": "",
+            "discount_bg": "",
+            "discount_text_color": "",
+            "border_color": "",
+            "default_font": true,
+            "fonts": "helvetica_n4",
+            "font_size_heading": 18,
+            "font_size_price": 30
+          }
+        },
+        "088c6a88-95db-42cd-b5cc-f6b56c8e8dad": {
+          "type": "shopify:\/\/apps\/subscription-plus\/blocks\/subscription-resource\/79c17119-154e-465c-8480-a7e0399512ff",
+          "settings": {
+          }
+        },
+        "22fced5a-ceb4-4339-8cb1-097516f4993f": {
+          "type": "shopify:\/\/apps\/subscription-plus\/blocks\/manage-subscription-button\/79c17119-154e-465c-8480-a7e0399512ff",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "a5a646f1-c013-4b04-8971-f32f44f65b28",
+        "088c6a88-95db-42cd-b5cc-f6b56c8e8dad",
+        "22fced5a-ceb4-4339-8cb1-097516f4993f"
+      ],
+      "settings": {
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
     }
   },
   "order": [
     "main",
-    "collection-banner"
+    "collection-banner",
+    "1695294879ab23d896"
   ]
 }
